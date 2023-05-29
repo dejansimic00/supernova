@@ -4,10 +4,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.net.InetAddress;
-import java.net.Socket;
 import java.net.URL;
 
 
@@ -33,50 +33,19 @@ public class HelloController {
         String name = "test ime";
         String pass= "test lozinka";
 
-       name = usernameTextField.getText();
-        pass = passwordTextField.getText();
+       /* name = usernameTextField.getText();
+        pass = usernameTextField.getText();*/
 
         System.out.println("ime" + name + "  lozinka "+ pass);
 
 
-        String httpBody = name + "#" + pass;
-        //provjera da li postoji u bazi#
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////
-
-        try {
-            InetAddress address = InetAddress.getLocalHost();
-            Socket s = new Socket(address,1030);
-
-            DataInputStream din = new DataInputStream(s.getInputStream());
-            DataOutputStream dout = new DataOutputStream(s.getOutputStream());
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-            String msgin="";
-            String msgout="";
-            while(!msgin.equals("chat.stop()")) {
-                System.out.print(">");
-                msgout =httpBody;
-                dout.writeUTF(msgout);
-                if(msgout.equals("chat.stop()"))
-                    break;
-                msgin = din.readUTF();
-                System.out.println("Server: "+msgin);
-                if(msgin.equals("chat.stop()"))
-                    break;
-            }
-            s.close();
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-
-    }
+        //provjera da li postoji u bazi
 
 
 
+        //promjena scene u slucaju
 
-    //promjena scene u slucaju
 
-/*
         String endpointUrl = "https://localhost:8080/api/endpoint";
         String jsonInputString = "{\"username\": \"example_user\", \"password\": \"password123\"}";
 
@@ -101,8 +70,9 @@ public class HelloController {
             connection.disconnect();
         } catch (Exception e) {
             e.printStackTrace();
-        }*/
+        }
     }
+}
 
 
 
