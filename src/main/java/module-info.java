@@ -5,4 +5,5 @@ module org.supernova {
 
     opens org.supernova to javafx.fxml;
     exports org.supernova;
+    exports org.supernova.controllers;
 }
