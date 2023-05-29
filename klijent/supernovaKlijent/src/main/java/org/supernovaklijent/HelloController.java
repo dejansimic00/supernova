@@ -39,7 +39,11 @@ public class HelloController {
         System.out.println("ime" + name + "  lozinka "+ pass);
 
 
+        //provjera da li postoji u bazi
 
+
+
+        //promjena scene u slucaju
 
 
         String endpointUrl = "https://localhost:8080/api/endpoint";
