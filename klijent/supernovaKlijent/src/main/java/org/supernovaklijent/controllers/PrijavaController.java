@@ -1,8 +1,8 @@
-package org.supernovaklijent;
+package org.supernovaklijent.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.TextField;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -10,26 +10,16 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-
-public class HelloController {
-    @FXML
-    public Button loginButton;
+public class PrijavaController {
 
     @FXML
     public TextField passwordTextField;
 
     @FXML
-    public Label welcomeText;
-
-    @FXML
     public TextField usernameTextField;
 
     @FXML
-    public Label welcomeText1;
-
-    @FXML
-    public void onHelloButtonClick(ActionEvent event) {
-
+    public void signInButtonClicked(ActionEvent event) {
         String name = "test ime";
         String pass= "test lozinka";
 
@@ -72,7 +62,5 @@ public class HelloController {
             e.printStackTrace();
         }
     }
+
 }
-
-
-
