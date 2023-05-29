@@ -39,9 +39,10 @@ public class HelloController {
         System.out.println("ime" + name + "  lozinka "+ pass);
 
 
-        String httpBody = name + "#" + pass;
-        //provjera da li postoji u bazi#
+        String httpBody = "username="+name+
+                "#password="+ pass;
 
+        //provjera da li postoji u bazi#
         ////////////////////////////////////////////////////////////////////////////////////////////////
 
         try {
@@ -72,37 +73,7 @@ public class HelloController {
     }
 
 
-
-
-    //promjena scene u slucaju
-
-/*
-        String endpointUrl = "https://localhost:8080/api/endpoint";
-        String jsonInputString = "{\"username\": \"example_user\", \"password\": \"password123\"}";
-
-        try {
-            URL url = new URL(endpointUrl);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("POST");
-            connection.setRequestProperty("Content-Type", "application/json");
-            connection.setDoOutput(true);
-
-            OutputStream outputStream = connection.getOutputStream();
-            outputStream.write(jsonInputString.getBytes());
-            outputStream.flush();
-
-            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            String response;
-            while ((response = reader.readLine()) != null) {
-                System.out.println(response);
-            }
-            reader.close();
-
-            connection.disconnect();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
-    }
+}
 
 
 
