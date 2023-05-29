@@ -4,10 +4,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.HttpURLConnection;
+import java.net.InetAddress;
+import java.net.Socket;
 import java.net.URL;
 
 public class PrijavaController {
@@ -20,47 +20,34 @@ public class PrijavaController {
 
     @FXML
     public void signInButtonClicked(ActionEvent event) {
-        String name = "test ime";
-        String pass= "test lozinka";
 
-       /* name = usernameTextField.getText();
-        pass = usernameTextField.getText();*/
-
-        System.out.println("ime" + name + "  lozinka "+ pass);
-
-
-        //provjera da li postoji u bazi
-
-
-
-        //promjena scene u slucaju
-
-
-        String endpointUrl = "https://localhost:8080/api/endpoint";
-        String jsonInputString = "{\"username\": \"example_user\", \"password\": \"password123\"}";
 
         try {
-            URL url = new URL(endpointUrl);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("POST");
-            connection.setRequestProperty("Content-Type", "application/json");
-            connection.setDoOutput(true);
+            String inputText = "login#username=" + usernameTextField.getText() +
+                    "#password=" + passwordTextField.getText();
 
-            OutputStream outputStream = connection.getOutputStream();
-            outputStream.write(jsonInputString.getBytes());
-            outputStream.flush();
+            System.out.println(inputText);
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            String response;
-            while ((response = reader.readLine()) != null) {
-                System.out.println(response);
-            }
-            reader.close();
 
-            connection.disconnect();
+            InetAddress ipAddress = InetAddress.getLocalHost();
+            Socket s = new Socket(ipAddress, 1030);
+            DataInputStream din = new DataInputStream(s.getInputStream());
+            DataOutputStream dout = new DataOutputStream(s.getOutputStream());
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            String requestMessage = "";
+            String responseMessage = "";
+
+
+            requestMessage = inputText;
+            dout.writeUTF(requestMessage);
+            responseMessage = din.readUTF();
+            System.out.println("Server: " + responseMessage);
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 }
+
+
