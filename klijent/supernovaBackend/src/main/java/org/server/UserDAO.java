@@ -60,5 +60,23 @@ public class UserDAO {
             return users;
         }
 
+    public boolean checkUserExists(String username, String password) {
+        boolean userExists = false;
+        String query = "{CALL check_user_exists(?, ?, ?)}";
+        try (PreparedStatement statement = MyConnection.connection.prepareStatement(query)) {
+            statement.setString(1, username);
+            statement.setString(2, password);
+            // Register the output parameter
+            statement.registerOutParameter(3, Types.INTEGER);
+
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userExists;
     }
+
+    public String checkBalance(String userName) {
+    }
+}
 

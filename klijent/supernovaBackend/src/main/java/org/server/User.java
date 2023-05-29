@@ -33,6 +33,11 @@ public class User {
         this.balance = balance;
     }
 
+    @Override
+    public String toString(){
+        return username + " " + name+ " " + surname+ " " + phoneNumber+ " " + mail+ " " + balance;
+    }
+
     public BigDecimal getBalance() {
         return BigDecimal.valueOf(balance);
     }

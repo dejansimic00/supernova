@@ -4,11 +4,16 @@ import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.SQLException;
+import java.util.List;
 
 public class Server {
     public static void main(String[] args) {
+
+
         try {
             ServerSocket ss = new ServerSocket(1030);
             Socket s = ss.accept();
@@ -36,6 +41,8 @@ public class Server {
         }
     }
 
+    private static UserDAO userDAO = new UserDAO();
+
     private static String parseInput(String input){
         String[] arr = input.split("#");
         String result = "";
@@ -45,34 +52,22 @@ public class Server {
 
             switch (method){
                 case "list":{
-
                     result = userListView();
-
-                    result = "list method valid";
-                    return result
-                            ;
-
+                    break;
                 } case "create" :{
-                    result = "create method valid";
+                    result = createUser(arr);
+                    break;
                 } case "pay" : {
-
+                    result = payment();
+                    break;
                 } case "updateBalance" :{
-
-                } case "balance" :{
-
+                    result = updateBalance(arr);
+                    break;
                 } case "login" :{
-
-                    result = userListView();
-
-                    result = "login method valid";
-                    return result
-                            ;
-
+                    result = login(arr);
                 } default :{
 
                 }
-
-
             }
 
             return result;
@@ -84,28 +79,55 @@ public class Server {
         return "Error 404";
     }
 
-    private static String userListView(){
+    private static String userListView()  {
+        try {
+            List<User> userList = userDAO.getUsers();
+            String result="";
+            for(User user : userList){
+                result+=user;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return "Error";
+    }
+
+    private static String createUser(String[] in){
+        User user = new User(in[1],in[2],in[3],in[4],in[5],in[6],Float.parseFloat(in[7]))
+        try {
+            userDAO.createUser(user);
+            return "Succesfull";
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return "Error";
+    }
+
+    private static String payment(String[] in ){
+
+        try {
+            userDAO.divideAndSubtractBalance(BigDecimal.valueOf(Float.parseFloat(in[1])));
+            return "Succesfull";
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return "Error";
+    }
+
+    private static String login(String[] in) {
 
         return "";
     }
 
-    private static String createUser(String in){
-
-        return "";
+    private static String checkBalance(String in[]){
+       return userDAO.checkBalance(in[1]);
     }
-
-    private static String payment( ){
-
-        return "";
-    }
-
-    private static String login() {
-
-        return "";
-    }
-
-    private static String checkBalance(){
-
-        return "";
+    private static String updateBalance(String[] in){
+        try {
+            userDAO.updateBalanceByUsername(in[1],BigDecimal.valueOf(Float.parseFloat(in[2])));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
