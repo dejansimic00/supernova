@@ -15,24 +15,97 @@ public class Server {
             DataInputStream din = new DataInputStream(s.getInputStream());
             DataOutputStream dout = new DataOutputStream(s.getOutputStream());
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-            String msgin = "";
-            String msgout = "";
-            while(!msgin.equals("chat.stop()")) {
-                msgin = din.readUTF();
-                System.out.print("Client: ");
-                System.out.println(msgin);
-                if(msgin.equals("chat.stop()"))
-                    break;
-                System.out.print(">>> ");
-                //msgout = br.readLine();
-                dout.writeUTF("true");
+            String requestMessage = "";
+            String responseMessage = "";
+            while(true) {
+                Thread.sleep(1000);
+                requestMessage = din.readUTF();
+                System.out.println(requestMessage+" FROM SERVER");
+
+
+                 responseMessage =  parseInput(requestMessage);
+
+                dout.writeUTF(responseMessage);
                 dout.flush();
-                if(msgout.equals("chat.stop()"))
-                    break;
+
             }
-            s.close();
+
         } catch (Exception e) {
             e.printStackTrace();
+
         }
+    }
+
+    private static String parseInput(String input){
+        String[] arr = input.split("#");
+        String result = "";
+        try{
+
+            String method = arr[0];
+
+            switch (method){
+                case "list":{
+
+                    result = userListView();
+
+                    result = "list method valid";
+                    return result
+                            ;
+
+                } case "create" :{
+                    result = "create method valid";
+                } case "pay" : {
+
+                } case "updateBalance" :{
+
+                } case "balance" :{
+
+                } case "login" :{
+
+                    result = userListView();
+
+                    result = "login method valid";
+                    return result
+                            ;
+
+                } default :{
+
+                }
+
+
+            }
+
+            return result;
+
+        } catch (ArrayIndexOutOfBoundsException arob){
+            System.out.println(" Bad Index");
+        }
+
+        return "Error 404";
+    }
+
+    private static String userListView(){
+
+        return "";
+    }
+
+    private static String createUser(String in){
+
+        return "";
+    }
+
+    private static String payment( ){
+
+        return "";
+    }
+
+    private static String login() {
+
+        return "";
+    }
+
+    private static String checkBalance(){
+
+        return "";
     }
 }
