@@ -13,22 +13,22 @@ import java.net.URL;
 
 public class HelloController {
     @FXML
-    private Button loginButton;
+    public Button loginButton;
 
     @FXML
-    private TextField passwordTextField;
+    public TextField passwordTextField;
 
     @FXML
-    private Label welcomeText;
+    public Label welcomeText;
 
     @FXML
-    private TextField usernameTextField;
+    public TextField usernameTextField;
 
     @FXML
-    private Label welcomeText1;
+    public Label welcomeText1;
 
     @FXML
-    void onHelloButtonClick(ActionEvent event) {
+    public void onHelloButtonClick(ActionEvent event) {
 
         String name = "test ime";
         String pass= "test lozinka";

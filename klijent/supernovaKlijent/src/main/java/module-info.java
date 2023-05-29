@@ -5,4 +5,5 @@ module org.supernovaklijent {
 
     opens org.supernovaklijent to javafx.fxml;
     exports org.supernovaklijent;
+    exports org.supernovaklijent.controllers;
 }
