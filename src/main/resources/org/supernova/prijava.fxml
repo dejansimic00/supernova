@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.supernova.controllers.PrijavaController">
+   <children>
+      <Label layoutX="193.0" layoutY="110.0" text="Korisničko ime" />
+      <Button layoutX="195.0" layoutY="268.0" mnemonicParsing="false" onAction="#signInButtonClicked" prefHeight="63.0" prefWidth="208.0" text="PRIJAVA" />
+      <TextField fx:id="usernameTextField" layoutX="299.0" layoutY="106.0" />
+      <TextField fx:id="passwordTextField" layoutX="299.0" layoutY="177.0" />
+      <Label layoutX="210.0" layoutY="180.0" prefHeight="19.0" prefWidth="54.0" text="Lozinka" />
+      <Label layoutX="250.0" layoutY="47.0" text="Prijavi se!" textFill="#2e53f5">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
